@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<script type="text/javascript" src="js/jquery-3.1.0.js"></script>
+<style>
+	body,div,a{margin:0px;padding:0px}
+	.cgBox{
+		height:350px;
+		width:1000px;
+		border:1px solid #ff0000;
+		
+	}
+	.imageBox{
+		height:330px;
+		width:1000px;
+		overflow:hidden;
+	}
+	.imageBox a{
+		display:block;
+		height:330px;
+		width:1000px;
+	
+	}
+	.buttonClick div{
+		float:right;
+		line-height:20px;
+		height:20px;
+		
+	}
+	.buttonClick a{
+		background:#999999;
+		padding:0 20px;
+		line-height:20px;
+		height:20px;
+	  float:left;
+		
+	}
+	.buttonClick a.active,.buttonClick a:hover{
+		background-color:#ff0000;
+	}
+</style>
+<script type="text/javascript">
+	$(function(){
+		var arrIamge=new Array(
+		"images/big1.jpg",
+		"images/big2.jpg",
+		"images/big3.jpg",
+		"images/big4.jpg",
+		"images/big5.jpg",
+		"images/big6.jpg"
+		)
+		var times=1;
+		function changeIamges(){
+		  	if(times==7){
+					times=1;
+				}
+			$(".buttonClick a").removeClass("active");
+			$(".buttonClick a:nth-child("+times+")").addClass("active");
+			$(".imageBox img").attr("src",arrIamge[times-1]);
+			times++;
+		}
+		var interval=window.setInterval(function(){ 
+			changeIamges();
+		},1500);
+		$(".buttonClick a").each(function(index){
+					$(this).hover(function(){
+						$(".buttonClick a").removeClass("active");
+						$(this).addClass("active");
+						$(".imageBox img").attr("src",arrIamge[index]);
+						times=index+1;
+						clearInterval(interval);
+					},function(){
+							interval=window.setInterval(function(){ 
+								changeIamges();
+							},1500);
+				})
+		})
+			
+		
+	})
+</script>
+<body>
+<div class="cgBox">
+	<div class="imageBox">
+		<a href="#"><img src="images/big1.jpg"></a>
+	</div>
+	<div class="buttonClick">
+		<div>
+			<a href="#" class="active">1</a>
+			<a href="#" class="">2</a>
+			<a href="#" class="">3</a>
+			<a href="#" class="">4</a>
+			<a href="#" class="">5</a>
+			<a href="#" class="">6</a>
+		</div>
+	</div>
+</div>
+</body>
+</html>
